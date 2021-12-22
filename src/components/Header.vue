@@ -1,7 +1,7 @@
 <template>
 <header class="header">
 <ul class="header_left">
-    <li>首页</li>
+    <li><router-link to="/">首页</router-link></li>
     <li>股票</li>
     <li>财经</li>
     <li>基金</li>
@@ -10,7 +10,7 @@
 
 </ul>
 <ul class="header_right">
-    <li>登录</li>
+    <li><router-link to="login">登录</router-link></li>
     <li>注册</li>
 </ul>
 </header>

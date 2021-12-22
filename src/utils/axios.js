@@ -3,14 +3,21 @@ import router from '@/router/index'
 import config from '~/config'
 import { ElMessage } from 'element-plus'
 import { localGet } from './index'
+import qs from 'qs'
 
-
+axios.defaults.baseURL="";
 // 这边由于后端没有区分测试和正式，姑且都写成一个接口。
-axios.defaults.baseURL = config[import.meta.env.MODE].baseUrl
+// axios.defaults.baseURL = config[import.meta.env.MODE].baseUrl
+//设置超时时间
+axios.defaults.timeout=10000;
 // 携带 cookie，对目前的项目没有什么作用，因为我们是 token 鉴权
 axios.defaults.withCredentials = true
+
 // 请求头，headers 信息
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
+//
+axios.defaults.transformRequest=data=>qs.stringify(data);
+
 axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 // 默认 post 请求，使用 application/json 形式
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -33,5 +40,5 @@ axios.interceptors.response.use(res => {
 
   return res.data.data
 })
-
+  
 export default axios
