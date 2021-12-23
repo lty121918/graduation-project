@@ -18,7 +18,7 @@
                                 <span>财经快讯</span>
                             </div>
                         </template>
-                        <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+                        <!-- <div v-for="item in news" :key="item[0]" class="text item">{{item[1]}}</div> -->
                     </el-card>
                 </div>
             </section>
@@ -41,7 +41,7 @@ export default {
             { url: "../../../src/assets/swiper05.jfif" },
         ];
         const state=reactive({
-            news:""
+            news:[]
         })
         //查看所有股票
         // axios
@@ -82,13 +82,16 @@ export default {
                 }
             )
             .then(function (response) {
-                console.log(response.data);
+                console.log(response.data.data.items.slice(0,8));
+                news=response.data.data;
+                console.log(news);
             })
             .catch(function (error) {
                 console.log(error);
             });
         return {
             itemList,
+            ...state
         };
     },
 };
