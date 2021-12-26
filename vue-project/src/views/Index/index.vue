@@ -1,26 +1,16 @@
 <template>
     <div class="index">
-        <img src="../../assets/logo.png" alt="">
-        <div class="index__content">
-            <el-carousel height="150px">
-                <el-carousel-item v-for="item in itemList" key="item.url">
-                    <img :src='item.url' alt="">
-                </el-carousel-item>
-            </el-carousel>
-            <section>
-                <div>左资讯</div>
-                <div>右资讯</div>
-            </section>
-        </div>
     </div>
 </template>
 <script>
 import axios from "axios";
-import { getImgUrl } from "../../utils/utils";
+//todo：学习怎么引入方法来使用
+import { getImgUrl,getItem } from "../../utils/utils";
 export default {
     data() {
         return {
             itemList: [
+                //todo:完成轮播图，导入图片问题
                 { url: require("../../assets/logo.png") },
                 // { url: require("../../assets/swiper01.jfif") },
                 // { url: require("../../assets/swiper02.jfif") },
@@ -30,8 +20,13 @@ export default {
         };
     },
     methods: {
+        back(){
+            getItem();
+        }
     },
     mounted() {
+        getItem();
+        //todo：封装axios，发送请求
         axios;
         //             .post(
         //                 "http://api.tushare.pro",

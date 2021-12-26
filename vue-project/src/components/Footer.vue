@@ -15,6 +15,7 @@ export default {
 </script>
 <style scoped>
   .footer {
+    margin-top: 60px;
     height: 50px;
     border-top: 1px solid #e9e9e9;
     display: flex;
