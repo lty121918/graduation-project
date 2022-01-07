@@ -1,11 +1,11 @@
 <template>
     <header class="header">
-        <div class="header__container">
-            <div class="header__left">
+        <div class="header-container">
+            <div class="header-container__left">
                 <div class="header__left__logo">
                     <img src="" alt="">
                 </div>
-                <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#fff" background-color="#1369bf" text-color="#fff">
+                <el-menu class="el-menu-demo" mode="horizontal" active-text-color="#fff" background-color="#1369bf" text-color="#fff">
                     <el-menu-item index="1">首页</el-menu-item>
                     <el-submenu index="2">
                         <template slot="title">精华</template>
@@ -28,8 +28,8 @@
                     </el-submenu>
                 </el-menu>
 
-                <div class="header__left__search">
-                    <el-select placeholder="搜索" size="small" multiple filterable remote></el-select>
+                <div class="header-container__search">
+                    <el-select placeholder="搜索" size="small" filterable remote></el-select>
                 </div>
             </div>
             <div class="header__right">
@@ -46,9 +46,7 @@ export default {
         return {};
     },
     methods: {
-        handleSelect(key, keyPath) {
-            console.log(key, keyPath);
-        },
+
     },
 };
 </script>
@@ -56,20 +54,20 @@ export default {
 .el-menu {
     background-color: #fff !important;
 }
-.el-menu-demo {
+.header .el-menu-demo {
     border: none !important;
 }
-.el-menu-item {
+.header .el-menu-item {
     border: 0px !important;
     border: none !important;
 }
-.el-menu-demo > .el-menu-item {
+.header .el-menu-demo > .el-menu-item {
     font-size: 16px;
 }
-.el-menu-demo .el-submenu__title {
+.header .el-menu-demo .el-submenu__title {
     font-size: 16px;
 }
-.el-submenu__title {
+.header .el-submenu__title {
     border: none !important;
 }
 .el-menu--popup > .el-menu-item {
@@ -108,7 +106,7 @@ export default {
             &__app{
                 font-size: 14px;
                 margin: auto;
-                margin-right: 10px;
+                margin-right: 15px;
             }
             &__login{
                 width: 128px;

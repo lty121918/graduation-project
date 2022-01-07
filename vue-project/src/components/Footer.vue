@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
-    <div class="left">Copyright © 2021-2022 &nbsp; lty毕业设计</div>
+    <div class="left">Copyright © 2021-2022 &nbsp; lty</div>
     <div class="right">
         理财门户网站
-      vue3 Version 1.0.0
+      vue2 Version 1.0.0
     </div>
   </div>
 </template>
