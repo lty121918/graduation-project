@@ -1,11 +1,18 @@
 <template>
     <header class="header">
-        <div class="header__container">
-            <div class="header__left">
-                <div class="header__left__logo">
-                    <img src="" alt="">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="header__logo">
+                    <img src="../assets/logo.png" alt />
                 </div>
-                <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#fff" background-color="#1369bf" text-color="#fff">
+                <el-menu
+                    class="el-menu-demo"
+                    mode="horizontal"
+                    @select="handleSelect"
+                    active-text-color="#fff"
+                    background-color="#1369bf"
+                    text-color="#fff"
+                >
                     <el-menu-item index="1">首页</el-menu-item>
                     <el-submenu index="2">
                         <template slot="title">精华</template>
@@ -28,18 +35,20 @@
                     </el-submenu>
                 </el-menu>
 
-                <div class="header__left__search">
+                <div class="header__search">
                     <el-select placeholder="搜索" size="small" multiple filterable remote></el-select>
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-sousuo" />
+                    </svg>
                 </div>
             </div>
-            <div class="header__right">
-                <div class="header__right__app">下载app</div>
-                <button class="header__right__login">登录/注册</button>
+            <div class="header-right">
+                <div class="header__app">下载app</div>
+                <button class="header__login">登录/注册</button>
             </div>
         </div>
     </header>
 </template>
-
 <script>
 export default {
     data() {
@@ -56,20 +65,22 @@ export default {
 .el-menu {
     background-color: #fff !important;
 }
-.el-menu-demo {
+.header .el-menu-demo {
     border: none !important;
 }
-.el-menu-item {
+.header .el-menu-item {
     border: 0px !important;
     border: none !important;
 }
-.el-menu-demo > .el-menu-item {
+.header .el-menu-demo > .el-menu-item {
     font-size: 16px;
 }
-.el-menu-demo .el-submenu__title {
+.header .el-menu-demo .el-submenu__title {
     font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.el-submenu__title {
+.header .el-submenu__title {
     border: none !important;
 }
 .el-menu--popup > .el-menu-item {
@@ -77,11 +88,12 @@ export default {
     color: #666c72 !important;
 }
 </style>
+<style>
+@import "../assets/iconfont/iconfont.css";
+</style>
 <style lang="less" scoped>
-
-
-@b:header;
- .@{b}{
+@b: header;
+.@{b} {
     position: fixed;
     background: #1369bf;
     left: 0;
@@ -89,40 +101,55 @@ export default {
     z-index: 999;
     width: 100%;
     color: #fff;
-    &__container {
+    &-container {
         width: 980px;
         margin: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
+    }
+    &-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__search{
+        .icon{
+            font-size: 25px;
+            position: relative;
+            left: -35px;
+            top: 6px;
         }
-        &__left {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+    }
+    &__logo {
+        img {
+            width: 65px;
+            height: 25px;
+            vertical-align: middle;
+            margin-right: 10px;
         }
-        &__right {
-            display: flex;
-            &__app{
-                font-size: 14px;
-                margin: auto;
-                margin-right: 10px;
-            }
-            &__login{
-                width: 128px;
-                padding: 6px 0px;
-                text-align: center;
-                font-size: 15px;
-                border: 1px #FFF solid ;
-                border-radius: 32px;
-                vertical-align: middle;
-                color: #fff;
-                cursor: pointer;
-                background-color: transparent;
-            }
-        }
-    
+    }
+    &-right {
+        display: flex;
+    }
+    &__app {
+        font-size: 14px;
+        margin: auto;
+        margin-right: 10px;
+    }
+    &__login {
+        width: 128px;
+        padding: 6px 0px;
+        text-align: center;
+        font-size: 15px;
+        border: 1px #fff solid;
+        border-radius: 32px;
+        vertical-align: middle;
+        color: #fff;
+        cursor: pointer;
+        background-color: transparent;
+    }
 }
 </style>
