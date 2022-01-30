@@ -1,4 +1,7 @@
 .index{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     &-banner{
         background-color: #e4f4ff;
         width: 100%;
@@ -9,5 +12,40 @@
         img{
             width: 80%;
         };
+    }
+    &-content{
+        width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        //左边文章部分
+        &__left{
+            background-color: aqua;
+            flex: 1;
+        }
+        //侧边栏
+        &__sider{
+            margin-left: 20px;
+            width: 280px;
+            &__select{
+                display: flex;
+                flex-direction: column;
+            }
+            &__item{
+                padding: 12px 0;
+                a{
+                    cursor: pointer;
+                    color: #33353c;
+                    margin-left: 20px;
+                }
+                
+            }
+            .line{
+                margin: 0 auto;
+                height: 1px;
+                color: #fcfcfc;
+                width: 200px;
+            }
+        }
     }
 }
