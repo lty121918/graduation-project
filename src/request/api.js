@@ -6,8 +6,6 @@ import request from './request'
 // 请求首页数据
 export const GetHomeAPI = (params) => request.get('/',  {params});
 
-// 登录
 export const PostHomeAPI = (params) => request.post('/', params);
 
-// 登录
 export const PostDaily = (params) => request.post('/', params);
