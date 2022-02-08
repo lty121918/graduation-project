@@ -7,5 +7,8 @@ import request from './request'
 export const GetHomeAPI = (params) => request.get('/',  {params});
 
 export const PostHomeAPI = (params) => request.post('/', params);
+//龙虎榜数据
+export const PostTop = (params) => request.post('/', params);
 
-export const PostDaily = (params) => request.post('/', params);
+//股票详细信息
+export const PostShares = (params) => request.post('/', params);

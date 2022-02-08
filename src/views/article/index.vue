@@ -2,7 +2,6 @@
     <div class="article">
         <headers></headers>
         <div class="article-content">
-            11111
         </div>
     </div>
 </template>

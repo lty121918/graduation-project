@@ -1,6 +1,5 @@
 <template>
     <div class="article">
-        1111
     </div>
 </template>
 <script>
