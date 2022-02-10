@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/shares/:id',
     name: 'Shares',
-    component: () => import('../views/shares/index.vue')
+    component: () => import('../views/stock/index.vue')
   }
 ]
 

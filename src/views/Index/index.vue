@@ -57,7 +57,6 @@
     </div>
 </template>
 <script>
-import axios from "axios";
 import Ranking from "../../components/Ranking.vue";
 import { PostTop, PostDaily } from "../../request/api";
 import Article from "./components/Article.vue";
