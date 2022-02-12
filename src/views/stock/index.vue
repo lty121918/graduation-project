@@ -98,6 +98,10 @@
                 <span>市场类型:&nbsp;<b>{{ stockName[5] }}</b></span>
                 <span>所属行业:&nbsp;<b>{{ stockName[4] }}</b></span>
             </div>
+            <div class="stock__main__echarts">
+                <Aecharts :echartsData="echartsData"></Aecharts>
+
+            </div>
         </div>
         <div class="stock__side">
             <div class="stock__side-item">
@@ -153,6 +157,7 @@
 
 <script>
 import { PostStock } from "../../request/api";
+import Aecharts from "./components/stockEcharts/Echarts.vue";
 export default {
     data() {
         return {
@@ -163,6 +168,7 @@ export default {
             stockCompany: [],
             stockUp: true,
             stockData: "20220209",
+            echartsData:['aaa']
         };
     },
     created() {
@@ -189,6 +195,7 @@ export default {
                     ts_code: this.stockId,
                 },
             }).then((res) => {
+                console.log(res.data.data.items);
                 this.stockPrice = res.data.data.items[0];
                 this.stockPrice[8] = this.stockPrice[8].toFixed(2);
             });
@@ -208,7 +215,7 @@ export default {
                         }
                     }
                 );
-                console.log(this.stockInfo);
+                // console.log(this.stockInfo);
             });
             //获得公司简介，业务介绍
             PostStock({
@@ -222,6 +229,9 @@ export default {
             });
         },
     },
+components:{
+    Aecharts
+}
 };
 </script>
 

@@ -10,7 +10,7 @@
                     <el-tab-pane label="沪深" name="first">
                         <p class="ranking__content__top" v-for="(item,index) in topList">
                             <span>{{index+1}}</span>
-                            <router-link :to="{ path: `/shares/${item[1]}`}" class="ranking__content__shares-name" @click="getInfo">{{item[2]}}</router-link>
+                            <router-link :to="{ path: `/stock/${item[1]}`}" class="ranking__content__shares-name" @click="getInfo">{{item[2]}}</router-link>
                         </p>
                     </el-tab-pane>
                     <el-tab-pane label="美股" name="second">配置管理</el-tab-pane>

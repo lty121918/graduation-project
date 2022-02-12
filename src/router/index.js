@@ -11,9 +11,9 @@ const routes = [
     component: Index
   },
   {
-    path: '/shares/:id',
-    name: 'Shares',
-    component: () => import('../views/stock/index.vue')
+    path: '/stock/:id',
+    name: 'Stock',
+    component: () => import('../views/stock/Index.vue')
   }
 ]
 
