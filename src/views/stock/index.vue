@@ -67,14 +67,14 @@
                     <a class="stock__main__operate__add">+自选</a>
                 </div>
             </div>
-            <div class="stock__main__price"  :class="stockPrice[8]>0 ? 'redStock' : 'greenStock'">
+            <div class="stock__main__price" :class="stockPrice[8]>0 ? 'redStock' : 'greenStock'">
                 <strong>￥{{ stockPrice[5] }}</strong>
                 <p>{{ stockPrice[7] }}</p>
                 <p>{{ stockPrice[8] }}%</p>
             </div>
             <div class="stock__main__info">
                 <span>最高:&nbsp;<b :class="stockPrice[8]>0 ? 'redStock' : 'greenStock'">{{ stockPrice[3] }}</b></span>
-                <span >今开:&nbsp;<b :class="stockPrice[8]>0 ? 'redStock' : 'greenStock'">{{ stockPrice[2] }}</b></span>
+                <span>今开:&nbsp;<b :class="stockPrice[8]>0 ? 'redStock' : 'greenStock'">{{ stockPrice[2] }}</b></span>
                 <span>涨停:&nbsp;<b :class="(1.1*stockPrice[5]).toFixed(2)>stockPrice[5] ? 'redStock' : 'greenStock'">{{ (1.1*stockPrice[5]).toFixed(2) }}</b></span>
                 <span>成交量:&nbsp;<b>{{ stockPrice[9] }}万手</b></span>
 
@@ -99,7 +99,7 @@
                 <span>所属行业:&nbsp;<b>{{ stockName[4] }}</b></span>
             </div>
             <div class="stock__main__echarts">
-                <Aecharts :echartsData="echartsData"></Aecharts>
+                <Aecharts :echartsData="echartsData" v-if="flag"></Aecharts>
 
             </div>
         </div>
@@ -129,7 +129,10 @@
                 {{ !log.showMore ? "展开" : "收起" }}
               </div>
             </template> </NEllipsis
-          > -->{{ stockCompany[0] }}
+          > -->
+                    <Ellipsis :lines="2" :text="stockCompany[0]">
+                        <!-- {{ stockCompany[0] }} -->
+                    </Ellipsis>
                 </div>
             </div>
             <div class="stock__side-item">
@@ -158,6 +161,7 @@
 <script>
 import { PostStock } from "../../request/api";
 import Aecharts from "./components/stockEcharts/Echarts.vue";
+import Ellipsis from "./components/ellipsis/index.vue";
 export default {
     data() {
         return {
@@ -167,8 +171,8 @@ export default {
             stockPrice: [],
             stockCompany: [],
             stockUp: true,
-            stockData: "20220209",
-            echartsData:['aaa']
+            echartsData: [],
+            flag:false
         };
     },
     created() {
@@ -195,7 +199,8 @@ export default {
                     ts_code: this.stockId,
                 },
             }).then((res) => {
-                console.log(res.data.data.items);
+                this.flag = true;
+                this.echartsData = res.data.data.items;
                 this.stockPrice = res.data.data.items[0];
                 this.stockPrice[8] = this.stockPrice[8].toFixed(2);
             });
@@ -210,7 +215,7 @@ export default {
                     (item, index, array) => {
                         if (typeof item === "number") {
                             return item.toFixed(2);
-                        }else{
+                        } else {
                             return item;
                         }
                     }
@@ -229,9 +234,10 @@ export default {
             });
         },
     },
-components:{
-    Aecharts
-}
+    components: {
+        Aecharts,
+        Ellipsis,
+    },
 };
 </script>
 
@@ -320,7 +326,8 @@ components:{
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            &>span {
+            margin-bottom: 30px;
+            & > span {
                 display: inline-block;
                 width: 160px;
                 height: 22px;
