@@ -167,7 +167,13 @@
       <div class="stock__main__echarts">
         <Aecharts :echartsData="echartsData" v-if="flag"></Aecharts>
       </div>
+              <div class="stock__main__comment">
+        <Comment></Comment>
+      </div>
     </div>
+
+
+<!-- 右侧侧边栏 -->
     <div class="stock__side">
       <div class="stock__side-item">
         <div class="stock__side__title">简介</div>
@@ -218,6 +224,7 @@
 import { PostStock } from "../../request/api";
 import Aecharts from "./components/stockEcharts/Echarts.vue";
 import Ellipsis from "./components/ellipsis/index.vue";
+import Comment from "../../components/comment/index.vue"
 export default {
   data() {
     return {
@@ -291,6 +298,7 @@ export default {
   components: {
     Aecharts,
     Ellipsis,
+    Comment
   },
 };
 </script>
