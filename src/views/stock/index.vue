@@ -168,7 +168,7 @@
         <Aecharts :echartsData="echartsData" v-if="flag"></Aecharts>
       </div>
               <div class="stock__main__comment">
-        <Comment></Comment>
+        <Comment :stockId="stockId"></Comment>
       </div>
     </div>
 

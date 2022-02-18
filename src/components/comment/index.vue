@@ -28,52 +28,49 @@
 </template>
 
 <script>
+import {setStorage,getStorage,getTime } from "../../utils/utils"
 export default {
   name: "Comment",
-  data() {
+  props:['stockId'],
+  data() { 
     return {
       circleUrl:
         "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
       textarea: "",
       commentData: [
         {
-          username: "章三",
+          username: "疯狂的韭菜",
           avatar:
             "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
           date: "2022-2-17",
           content:
-            "lalalalallasdasdassdfsdfsdfkjgdsanjsdjbdkjsjdbmfjkjsldzjfbzlASJzvknkmlskaNbjnvklkMNZjbkvlkjahzvjkCMNXBzjvkldsndlaala",
-          reply: {
-            username: "章22三",
-            date: "2022-2-18",
-            content:
-              "lalalasdasdassdfsdfsdfkjgdsanjsdjbdkjsjdbmfjkjsldzjfbzlASJzvknkmlskaNbjnvklkMNZjbkvlkjahzvjkCMNXBzjvkldsndlalala",
-          },
+            "默认评论测试",
+          reply:[]
         },
       ],
     };
   },
+  mounted() {
+    if(getStorage(this.stockId)){
+        this.commentData=getStorage(this.stockId);
+    }
+    
+
+  },  
   methods: {
     reply() {
       let newComment = {
         username: "章三",
         avatar:this.circleUrl,
-        date: this.getTime(),
+        date: getTime(),
         content:this.textarea,
         reply: [],
       };
       this.commentData.unshift(newComment);
       this.textarea='';
+      setStorage(this.stockId,this.commentData);
     },
-    getTime(){
-        let time=new Date();
-        let year=time.getFullYear();
-        let mounth=time.getMonth()+1;
-        let date=time.getDate();
-        let hour= time.getHours();//得到小时数
-        let minute= time.getMinutes();//得到分钟数
-        return  `${year}-${mounth}-${date}  ${hour}:${minute}`;
-    }
+    
   },
 };
 </script>

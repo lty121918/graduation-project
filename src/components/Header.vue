@@ -54,9 +54,11 @@
         <button class="header__login">登录/注册</button>
       </div>
     </div>
+    <login></login>
   </header>
 </template>
 <script>
+import login from "./login/index.vue"
 export default {
   data() {
     return {
@@ -72,6 +74,9 @@ export default {
       this.$router.push("/");
     },
   },
+  components:{
+    login
+  }
 };
 </script>
 <style>
