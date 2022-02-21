@@ -28,49 +28,53 @@
 </template>
 
 <script>
-import {setStorage,getStorage,getTime } from "../../utils/utils"
+import { setStorage, getStorage, getTime } from "../../utils/utils";
 export default {
   name: "Comment",
-  props:['stockId'],
-  data() { 
+  props: ["stockId"],
+  data() {
     return {
       circleUrl:
         "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
       textarea: "",
+      userData: {},
       commentData: [
         {
           username: "疯狂的韭菜",
           avatar:
             "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
           date: "2022-2-17",
-          content:
-            "默认评论测试",
-          reply:[]
+          content: "默认评论测试",
+          reply: [],
         },
       ],
     };
   },
   mounted() {
-    if(getStorage(this.stockId)){
-        this.commentData=getStorage(this.stockId);
+    if (getStorage(this.stockId)) {
+      this.commentData = getStorage(this.stockId);
     }
-    
-
-  },  
+  },
   methods: {
     reply() {
-      let newComment = {
-        username: "章三",
-        avatar:this.circleUrl,
-        date: getTime(),
-        content:this.textarea,
-        reply: [],
-      };
-      this.commentData.unshift(newComment);
-      this.textarea='';
-      setStorage(this.stockId,this.commentData);
+      //判断是否登陆
+      this.userData = getStorage("user");
+      console.log(this.userData);
+      if (this.userData === null) {
+        this.$message.error("请先登录");
+      } else {
+        let newComment = {
+          username: this.userData.username,
+          avatar: this.userData.circleUrl,
+          date: getTime(),
+          content: this.textarea,
+          reply: [],
+        };
+        this.commentData.unshift(newComment);
+        this.textarea = "";
+        setStorage(this.stockId, this.commentData);
+      }
     },
-    
   },
 };
 </script>

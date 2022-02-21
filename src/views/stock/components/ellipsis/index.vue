@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     moreState(nums) {
-      console.log(nums);
       this.isShow = !this.isShow;
       console.log(this.isShow);
     },

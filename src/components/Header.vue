@@ -51,22 +51,65 @@
       </div>
       <div class="header-right">
         <div class="header__app">下载app</div>
-        <button class="header__login">登录/注册</button>
+        <button class="header__login" @click="dialog += 1" v-if="!isLogin">
+          登录/注册
+        </button>
+        <div class="header__user" v-else="isLogin">
+          <el-dropdown class="dropdown" placement="bottom" @command="handleCommand">
+            <span class="iconfont icon-wode"></span>
+            <!-- <span>{{ UserData }}</span> -->
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>修改资料</el-dropdown-item>
+              <el-dropdown-item command="exit">注销</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </div>
     </div>
-    <login></login>
+    <login :dialog="dialog" @isLogin="isLogin=true"></login>
   </header>
 </template>
 <script>
-import login from "./login/index.vue"
+import login from "./login/index.vue";
+import { getStorage, removeStorage } from "../utils/utils";
 export default {
   data() {
     return {
       activeIndex: "1",
       value: [],
+      dialog: 1,
+      isLogin: false,
+      userData: {},
     };
   },
+  mounted() {
+    this.initLogin();
+  },
   methods: {
+    //用户初始化，得到登陆用户数据
+    initLogin() {
+      if (getStorage("user")) {
+        this.isLogin = true;
+        this.userData = getStorage("user");
+      } else {
+        this.isLogin = false;
+      }
+    },
+    //下拉菜单的操作
+    handleCommand(command) {
+        if (command==="exit") {
+          this.exitLogin();
+        }
+    },
+    //退出登陆
+    exitLogin() {
+      this.isLogin = false;
+      removeStorage("user");
+            this.$message({
+          message: '退出成功',
+          type: 'success'
+        });
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -74,42 +117,15 @@ export default {
       this.$router.push("/");
     },
   },
-  components:{
-    login
-  }
+  components: {
+    login,
+  },
 };
 </script>
 <style>
-.el-menu {
-  background-color: #fff !important;
-}
-.header .el-menu-demo {
-  border: none !important;
-}
-.header .el-menu-item {
-  border: 0px !important;
-  border: none !important;
-}
-.header .el-menu-demo > .el-menu-item {
-  font-size: 16px;
-}
-.header .el-menu-demo .el-submenu__title {
-  font-size: 16px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.header .el-submenu__title {
-  border: none !important;
-}
-.el-menu--popup > .el-menu-item {
-  background: #fff !important;
-  color: #666c72 !important;
-}
-</style>
-<style>
 @import "../assets/iconfont/iconfont.css";
 </style>
-<style lang="less" scoped>
+<style lang="less">
 @b: header;
 .@{b} {
   position: fixed;
@@ -169,5 +185,57 @@ export default {
     cursor: pointer;
     background-color: transparent;
   }
+  &__user {
+    margin-left: 10px;
+    border-left: #fff 1px solid;
+    padding-left: 15px;
+  }
+  .dropdown {
+    display: flex;
+  }
+  .line {
+    color: #fff;
+    height: 20px;
+  }
+  .iconfont {
+    font-size: 23px;
+    color: #fff;
+  }
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
+.el-icon-arrow-down {
+  font-size: 16px;
+  color: #fff;
+  position: absolute;
+  top: 15px;
+}
+.el-menu {
+  background-color: #fff !important;
+}
+.header .el-menu-demo {
+  border: none !important;
+}
+.header .el-menu-item {
+  border: 0px !important;
+  border: none !important;
+}
+.header .el-menu-demo > .el-menu-item {
+  font-size: 16px;
+}
+.header .el-menu-demo .el-submenu__title {
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.header .el-submenu__title {
+  border: none !important;
+}
+.el-menu--popup > .el-menu-item {
+  background: #fff !important;
+  color: #666c72 !important;
 }
 </style>
