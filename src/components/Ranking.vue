@@ -11,6 +11,7 @@
                         <p class="ranking__content__top" v-for="(item,index) in topList">
                             <span>{{index+1}}</span>
                             <router-link :to="{ path: `/stock/${item[1]}`}" class="ranking__content__shares-name" @click="getInfo">{{item[2]}}</router-link>
+                            <span class="ranking__content__shares-price">{{item[3]}}</span>
                         </p>
                     </el-tab-pane>
                     <el-tab-pane label="美股" name="second">配置管理</el-tab-pane>
@@ -80,8 +81,19 @@ export default {
         }
     }
     &__content {
+        &__top{
+            padding: 0 25px;
+        }
         &__shares-name{
             cursor: pointer;
+            text-decoration: none;
+            color: #33353c;
+            margin-left: 10px;
+        }
+        &__shares-price{
+            color: red;
+            float: right;
+
         }
     }
     //龙虎榜element ui样式

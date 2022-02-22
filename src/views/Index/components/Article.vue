@@ -1,43 +1,52 @@
 <template>
     <div class="article">
+    <div v-for="item in articleList" class="article__item">
+{{item[1]}}
+</div>
     </div>
 </template>
 <script>
-//todo：学习怎么引入方法来使用
+import { PostArticle,setStorage,getStorage } from "../../../request/api";
 export default {
     data() {
-        return {};
+        return {
+            articleList:[]
+        };
     },
-    methods: {},
-    mounted() {
-        // axios
-        //     .post(
-        //         "http://api.tushare.pro",
-        //         {
-        //             api_name: "news",
-        //             params: {
-        //                 start_date: "20181120",
-        //                 end_date: "20211220",
-        //                 src: "sina",
-        //             },
-        //             fields: "",
-        //         },
-        //         {
-        //             headers: {
-        //                 "Content-Type": "application/x-www-form-urlencoded",
-        //             },
-        //         }
-        //     )
-        //     .then(function (response) {
-        //         console.log(response.data.data.items.slice(0, 8));
-        //         news = response.data.data;
-        //         console.log(news);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+    created() {
+         this.showArticle();
+    },
+    methods: {
+        showArticle() {
+            PostArticle({
+                api_name :"major_news",
+                params: {
+                },
+                 fields: "title,content,pub_time,src",
+            }).then((res) => {
+                console.log(res);
+                if(res.data.data.items){
+                    setStorage("articleList",res.data.data.items);
+                }
+                this.articleList=getStorage("articleList").map((index,item,array)=>{
+                    item=cutString(item[1],200);
+                    console.log(index);
+                })
+            }).catch(err=>{
+                console.log(err);
+            })
+        }
+
     },
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
+.article{
+    &__item{
+        width: 640px;
+        height: 150px;
+        padding: 15px 0;
+        border-bottom: 1px solid #edf0f5;
+    }
+}
 </style>
