@@ -4,7 +4,7 @@
             <img src="../../assets/banner.jpg" alt="banner" />
         </div>
         <div class="index-content">
-            <div class="index-content__left">文章
+            <div class="index-content__left">
                 <Article></Article>
             </div>
             <div class="index-content__sider">

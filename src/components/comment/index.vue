@@ -81,8 +81,8 @@ export default {
 
 <style lang="less">
 .comment {
-  margin-top: 50px;
-  margin-left: 10px;
+  width: 630px;
+  margin: 50px auto 0 ;
   .el-avatar {
     display: inline-block;
     margin-bottom: 20px;

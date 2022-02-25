@@ -9,7 +9,7 @@
                 <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                     <el-tab-pane label="沪深" name="first">
                         <p class="ranking__content__top" v-for="(item,index) in topList">
-                            <span>{{index+1}}</span>
+                            <span :class="{ red: index<3 }">{{index+1}}</span>
                             <router-link :to="{ path: `/stock/${item[1]}`}" class="ranking__content__shares-name" @click="getInfo">{{item[2]}}</router-link>
                             <span class="ranking__content__shares-price">{{item[3]}}</span>
                         </p>
@@ -27,7 +27,7 @@ import { PostTop } from "../request/api";
 export default {
     data() {
         return {
-            activeName: "second",
+            activeName: "first",
             topList: [],
         };
     },
@@ -88,13 +88,16 @@ export default {
             cursor: pointer;
             text-decoration: none;
             color: #33353c;
-            margin-left: 10px;
+            margin-left: 20px;
         }
         &__shares-price{
-            color: red;
+            color: #d20;
             float: right;
 
         }
+    }
+    .red{
+        color: #d20;
     }
     //龙虎榜element ui样式
     .el-tabs__nav-scroll{

@@ -14,6 +14,12 @@ const routes = [{
         name: 'Stock',
         component: () =>
             import ('../views/stock/index.vue')
+    },
+    {
+        path: '/article/:id',
+        name: 'Article',
+        component: () =>
+            import ('../views/article/index.vue')
     }
 ]
 

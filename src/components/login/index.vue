@@ -50,7 +50,7 @@ export default {
       timeTrue: true,
       time: 0,
       form:{
-        phone: "11",
+        phone: "",
         check: "",
       },
       formLabelWidth: "60px",
