@@ -2,7 +2,7 @@
   <div class="comment">
     <h3 class="comment__header">发表评论</h3>
     <div class="comment__main">
-      <el-avatar :size="50" :src="circleUrl"></el-avatar>
+      <el-avatar :size="50" :src="userData.circleUrl"></el-avatar>
       <el-input
         type="textarea"
         placeholder="请输入内容"
@@ -14,6 +14,7 @@
       </el-input>
       <el-button type="primary" size="small" @click="reply">发表</el-button>
     </div>
+    <!-- 评论区 -->
     <div class="comment__items">
       <div class="comment__items__info" v-for="(item, index) in commentData">
         <div class="comment__items__info-avatar">
@@ -22,6 +23,7 @@
         <div class="comment__items__info-username">{{ item.username }}</div>
         <div class="comment__items__info-data">{{ item.date }}</div>
         <div class="comment__items__info-content">{{ item.content }}</div>
+        <p class="comment__items__info-reply" @click="toReply(index)">回复</p>
       </div>
     </div>
   </div>
@@ -34,35 +36,36 @@ export default {
   props: ["stockId"],
   data() {
     return {
-      circleUrl:
-        "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+      id:"",
       textarea: "",
       userData: {},
       commentData: [
         {
-          username: "疯狂的韭菜",
-          avatar:
-            "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-          date: "2022-2-17",
-          content: "默认评论测试",
+          username:"默认用户",
+          avatar:"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+          date: getTime(),
+          content: "默认评论",
           reply: [],
-        },
+        }
       ],
     };
   },
-  mounted() {
-    if (getStorage(this.stockId)) {
-      this.commentData = getStorage(this.stockId);
-    }
+  created() {
+   this.init();
   },
   methods: {
+    init(){
+      this.userData = getStorage("user");
+      this.id = this.$route.params.id;
+    },
+    //发表
     reply() {
       //判断是否登陆
       this.userData = getStorage("user");
-      console.log(this.userData);
       if (this.userData === null) {
         this.$message.error("请先登录");
       } else {
+        //与已经登陆的状态下
         let newComment = {
           username: this.userData.username,
           avatar: this.userData.circleUrl,
@@ -72,9 +75,14 @@ export default {
         };
         this.commentData.unshift(newComment);
         this.textarea = "";
-        setStorage(this.stockId, this.commentData);
+        setStorage(this.id, this.commentData);
       }
     },
+    //回复
+    toReply(index){
+      console.log(index);
+      console.log(this.commentData[index]);
+    }
   },
 };
 </script>
@@ -133,6 +141,20 @@ export default {
         margin-left: 60px;
         word-wrap: break-word;
         margin-bottom: 10px;
+      }
+      &-reply{
+        color: #8a919f;
+        font-size: 14px;
+        display: inline-block;
+        margin-left: auto;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        margin-top: -20px;
+        cursor: pointer;
+        transition: all 0.5s;
+        &:hover{
+          color:#1171ee
+        }
       }
     }
   }
