@@ -17,6 +17,9 @@
                 <div class="comment__items__info-data">{{ item.date }}</div>
                 <div class="comment__items__info-content">{{ item.content }}</div>
                 <p class="comment__items__info-reply" @click="toReply(index)">回复</p>
+                <!-- <el-input type="textarea" placeholder="请输入回复内容" v-model="textarea" maxlength="60" resize="none" show-word-limit class="reply" v-if="showReply">
+                </el-input>
+                <el-button v-if="showReply" class="replyButton" @click="toReply(index)">发表回复</el-button> -->
             </div>
         </div>
     </div>
@@ -31,6 +34,7 @@ export default {
         return {
             id: "",
             textarea: "",
+            showReply: false,
             userData: {
                 circleUrl:
                     "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
@@ -54,8 +58,8 @@ export default {
             if (getStorage("user") !== null) {
                 this.userData = getStorage("user");
             }
-
             this.id = this.$route.params.id;
+            this.commentData = getStorage(this.id);
         },
         //发表
         reply() {
@@ -81,6 +85,7 @@ export default {
         toReply(index) {
             console.log(index);
             console.log(this.commentData[index]);
+            this.textarea = `$回复${this.commentData[index].username}:`;
         },
     },
 };
@@ -90,6 +95,19 @@ export default {
 .comment {
     width: 630px;
     margin: 50px auto 0;
+    .replyButton {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        margin: auto !important;
+        margin-left: 470px !important;
+        margin-top: 10px !important;
+    }
+    .reply {
+        margin-left: 30px;
+        display: block;
+        margin-top: -20px;
+    }
     .el-avatar {
         display: inline-block;
         margin-bottom: 20px;
@@ -145,6 +163,9 @@ export default {
                 color: #8a919f;
                 font-size: 14px;
                 display: inline-block;
+                display: block;
+                overflow: hidden;
+                clear: both;
                 margin-left: auto;
                 margin-bottom: 10px;
                 margin-right: 10px;

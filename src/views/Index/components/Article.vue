@@ -10,7 +10,17 @@
                     </router-link>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="7x24" name="second">7x24</el-tab-pane>
+            <el-tab-pane label="热议" name="second">
+                <div v-for="(item, index) in userArticleList" class="article__item">
+                    <router-link :to="{ path: `/userarticle/${index}` }">
+                        <div class="article__item-title" v-html="item.title"></div>
+                        <!-- <div class="article__item-content">&nbsp;&nbsp;&nbsp;{{ item[1] }}</div> -->
+                        <div class="article__item-time">{{ item.time }}</div>
+                    </router-link>
+                </div>
+
+            </el-tab-pane>
+
         </el-tabs>
     </div>
 </template>
@@ -22,11 +32,13 @@ export default {
         return {
             activeName: "first",
             articleList: [],
+            userArticleList: [],
         };
     },
     created() {
         this.showArticle();
         this.printArticle();
+        this.userArticleList = getStorage("userArticleList");
     },
     methods: {
         showArticle() {

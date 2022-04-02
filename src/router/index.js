@@ -13,14 +13,26 @@ const routes = [{
         path: '/stock/:id',
         name: 'Stock',
         component: () =>
-            import ('../views/stock/index.vue')
+            import('../views/stock/index.vue')
     },
     {
         path: '/article/:id',
         name: 'Article',
         component: () =>
-            import ('../views/article/index.vue')
-    }
+            import('../views/article/index.vue')
+    },
+    {
+        path: '/userarticle/:id',
+        name: 'Userarticle',
+        component: () =>
+            import('../views/userarticle/index.vue')
+    },
+    {
+        path: '/create',
+        name: 'Create',
+        component: () =>
+            import('../views/createArtcle/index.vue')
+    },
 ]
 
 const router = new VueRouter({
@@ -30,3 +42,16 @@ const router = new VueRouter({
 })
 
 export default router
+
+
+
+
+
+let obj = {
+    name: 'zs',
+    age: 18,
+    arr: {
+        name: 'zs'
+    }
+}
+

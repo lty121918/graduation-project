@@ -51,8 +51,8 @@ export default {
                 }
             });
         },
-        getInfo(){
-            console.log('股票信息');
+        getInfo() {
+            console.log("股票信息");
         },
         //tab
         handleClick(tab, event) {
@@ -81,30 +81,29 @@ export default {
         }
     }
     &__content {
-        &__top{
+        &__top {
             padding: 0 25px;
         }
-        &__shares-name{
+        &__shares-name {
             cursor: pointer;
             text-decoration: none;
             color: #33353c;
             margin-left: 20px;
         }
-        &__shares-price{
+        &__shares-price {
             color: #d20;
             float: right;
-
         }
     }
-    .red{
+    .red {
         color: #d20;
     }
     //龙虎榜element ui样式
-    .el-tabs__nav-scroll{
+    .el-tabs__nav-scroll {
         display: flex;
         justify-content: center;
     }
-    .el-tabs__item{
+    .el-tabs__item {
         height: 30px;
         line-height: 30px;
     }
